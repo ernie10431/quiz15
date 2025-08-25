@@ -239,7 +239,7 @@ public class QuizServiceImpl implements QuizSrevice {
 		// 搜尋
 		List<Quiz> list = new ArrayList<>();
 		if(req.isPublished()) {
-			list = quizDao.getAllPublished(quizName, startDate, endDate);
+			list = quizDao.getAll(quizName, startDate, endDate);
 		}else {
 			list = quizDao.getAll(quizName, startDate, endDate);
 		}
