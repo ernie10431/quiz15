@@ -1,6 +1,7 @@
 package com.example.quiz15.service.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -236,9 +237,33 @@ public class QuizServiceImpl implements QuizSrevice {
 				: req.getEndDate();
 
 		// 搜尋
-		List<Quiz> list = quizDao.getAll(quizName, startDate, endDate);
+		List<Quiz> list = new ArrayList<>();
+		if(req.isPublished()) {
+			list = quizDao.getAll(quizName, startDate, endDate);
+		}else {
+			list = quizDao.getAll(quizName, startDate, endDate);
+		}
 		return new SearchRes(ResCodeMassage.SUCCESS.getCode(), //
 				ResCodeMassage.SUCCESS.getMessage(), list);
+
+	}
+
+	@Transactional(rollbackOn = Exception.class)
+	@Override
+	public BasicRes delete(int quizId) throws Exception{
+		if (quizId <= 0) {
+			return new BasicRes(ResCodeMassage.QUIZ_ID_ERROR.getCode(), //
+					ResCodeMassage.QUIZ_ID_ERROR.getMessage());
+		}
+		try {
+			quizDao.deleteById(quizId);
+			questionDao.deleteByQuizId(quizId);
+
+		} catch (Exception e) {
+			// 不能 return BasicRes 而是要將發生的異常拋出去，這樣 @Transaction 才會生效
+			throw e;
+		}
+		return null;
 
 	}
 }

@@ -15,4 +15,6 @@ public interface QuizSrevice {
 	public SearchRes getAllQuizs();
 	
     public SearchRes searach(SearchReq req);
+    
+    public BasicRes delete(int quizId) throws Exception;
 }

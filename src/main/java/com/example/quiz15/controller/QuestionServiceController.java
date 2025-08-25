@@ -22,12 +22,12 @@ public class QuestionServiceController {
 	private QuizSrevice quizService;
 
 	@PostMapping("quiz/create")
-	public ResponseEntity<String> create(@Valid @RequestBody QuizCreateReq req) throws Exception {
+	public ResponseEntity<BasicRes> create(@Valid @RequestBody QuizCreateReq req) throws Exception {
 		BasicRes res = quizService.create(req);
 		if(res.getCode() == 200) {
-			return ResponseEntity.ok(res.getMessage());
+			return ResponseEntity.ok(res);
 		}
-		return ResponseEntity.badRequest().body(res.getMessage());
+		return ResponseEntity.badRequest().body(res);
 	}
 	
 	@PostMapping("quiz/update")

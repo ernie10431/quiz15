@@ -45,4 +45,15 @@ public interface QuizDao extends JpaRepository<Quiz, Integer>{
 	@Query(value = "selet * from quiz where name like %?1% and start_time >= ?2 "//
 			+ " and end_time <= ?3;", nativeQuery = true)
 	public List<Quiz> getAll(String name, LocalDate starDate,LocalDate endDate);
+	
+	// is_published = true 可以換成 is_published is true，等號跟 is 互換只能用在 boolean
+	@Query(value = "selet * from quiz where name like %?1% and start_time >= ?2 "//
+			+ " and end_time <= ?3 and is_published is true;", nativeQuery = true)
+	public List<Quiz> getAllPublished(String name, LocalDate starDate,//
+			LocalDate endDate);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "delete from quiz where id = ?1;", nativeQuery = true)
+	public void deleteById(int Id);
 }

@@ -13,7 +13,8 @@ public enum ResCodeMassage {
 	QUESTION_TYPE_ERROR(400,"Question Type Error!!"),//
 	OPTIONS_INSUFFICIENT(400, "Options Insufficient!!"),//
 	TEXT_HAS_OPTIONS_ERROR(400, "Text Has Options Error!!"),//
-	QUIZ_UPDATE_FAILED(400,"Quiz Update Failed!!")
+	QUIZ_UPDATE_FAILED(400,"Quiz Update Failed!!"),//
+	QUIZ_ID_ERROR(400, "Quiz Id Error!!"),//
 	;
 
 	private int code;
