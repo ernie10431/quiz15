@@ -41,4 +41,8 @@ public interface QuizDao extends JpaRepository<Quiz, Integer>{
 	
 	@Query(value = "selet * from quiz;", nativeQuery = true)
 	public List<Quiz> getAll();
+	
+	@Query(value = "selet * from quiz where name like %?1% and start_time >= ?2 "//
+			+ " and end_time <= ?3;", nativeQuery = true)
+	public List<Quiz> getAll(String name, LocalDate starDate,LocalDate endDate);
 }

@@ -11,6 +11,8 @@ import com.example.quiz15.service.ifs.UserService;
 import com.example.quiz15.vo.AddInfoReq;
 import com.example.quiz15.vo.BasicRes;
 import com.example.quiz15.vo.LoginReq;
+import com.example.quiz15.vo.SearchReq;
+import com.example.quiz15.vo.SearchRes;
 
 import jakarta.validation.Valid;
 
@@ -27,7 +29,9 @@ public class QuizController {
 	private UserService userService;
 	
 	@Autowired
-	private QuizSrevice questionSrevice;
+	private QuizSrevice quizSrevice;
+	
+	
 	
 	@PostMapping(value = "user/addInfo") // 接口
 	public BasicRes addInfo(@Valid @RequestBody AddInfoReq req) {
@@ -37,6 +41,11 @@ public class QuizController {
 	@PostMapping(value = "user/login") // 接口
 	public BasicRes login(@Valid @RequestBody LoginReq req) {
 		return userService.login(req);
+	}
+	
+	@PostMapping(value = "user/search") // 接口
+	public SearchRes search(@Valid @RequestBody SearchReq req) {
+		return quizSrevice.searach(req);
 	}
 	
 //	@PostMapping(value = "user/getAllQuizs") // 接口
